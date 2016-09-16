@@ -18,3 +18,12 @@ entityManager.prototype.addEntity = function(entity){
   var top = Math.floor(entity.y / this.cellSize);
   var bottom = Math.ceil((entity.y + entity.height) / this.cellSize);
 }
+
+entityManager.prototype.updateEntity = function() {
+	var x;
+	var y;
+	var index = y * this.widthInCells + x;
+	if(index != entity._cell) {
+		var cellIndex;
+	}
+}

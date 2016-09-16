@@ -4,17 +4,20 @@
 const Game = require('./game.js');
 const Player = require('./player.js');
 const Snake = require('./snake.js');
+const EntityManager = require('./entityManager.js');
 
 /* Global variables */
 var canvas = document.getElementById('screen');
 var game = new Game(canvas, update, render);
+game.entities = new EntityManager(128);
 var player = new Player({x: 382, y: 440});
 var snakes = [];
-for(var i=0; i < 20; i++) {
+for(var i = 0; i < 20; i++) {
   snakes.push(new Snake({
     x: Math.random() * 760,
     y: Math.random() * 20 + 100
   }));
+  entities.add(snake);
 }
 snakes.sort();
 
@@ -40,7 +43,11 @@ masterLoop(performance.now());
  */
 function update(elapsedTime) {
   player.update(elapsedTime);
-  snakes.forEach(function(snake) { snake.update(elapsedTime);});
+  snakes.forEach(function(snake) {snake.update(elapsedTime);});
+  entities.collide(function(entity1, entity2) {
+	  entity1.color = "red";
+	  entity2.color = "red";
+  }
   // TODO: Update the game objects
 }
 
